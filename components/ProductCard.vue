@@ -31,7 +31,7 @@ const count = ref(0);
 
 <style scoped lang="postcss">
 .card {
-  @apply shadow rounded-lg p-4 text-center text-lg font-bold text-gray-700 bg-white sm:w-1/3 lg:w-1/4 flex-grow;
+  @apply shadow rounded-lg p-4 text-center text-lg font-normal text-gray-700 bg-white sm:w-1/3 lg:w-1/4 flex-grow border;
 }
 .card img {
   @apply mx-auto;

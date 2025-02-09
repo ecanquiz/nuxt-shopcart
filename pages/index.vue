@@ -23,6 +23,7 @@ productStore.fill();
 </script>
 
 <template>
+  <Refactor />
   <div class="container p-10">
     <TheHeader />
     <div class="mb-5 flex justify-end">

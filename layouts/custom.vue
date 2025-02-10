@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <!--NavBar /-->
+
+      
       <div
         class="
           mx-auto
@@ -15,7 +15,11 @@
           w-3/5
         "
       >
+        <NavbarCustom />
         <slot />
+      <TheFooter />
+
       </div>
-    </div>
+
+
   </template>

@@ -2,8 +2,8 @@
   <!--https://tailwindflex.com/@abhirajk/shoping-products-->
   <NuxtLayout>
     <NuxtLoadingIndicator />
-    <Navbar />
+    <!--Navbar /-->
     <NuxtPage />
-    <Footerbar />
+    <!--Footerbar /-->
   </NuxtLayout>
 </template>

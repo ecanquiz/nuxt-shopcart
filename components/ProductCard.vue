@@ -16,14 +16,19 @@ const count = ref(0);
 </script>
 <template>
   <li class="card">
-    <img :src="`/images/${product.image}`" class="mb-3" width="300" />
+    <img :src="`/images/${product.image}`" class="w-full h-64 object-cover mb-3 rounded-2xl" width="300" />
     <div>
-      {{ product.name }} - <span class="text-green-500">${{product.price}}</span>
-      <div class="text-center m-4">
+     
+      <div class="text-center mt-4">
+        {{ product.name }} - <span class="text-green-500 mr-4">${{product.price}}</span>
         <AppCountInput v-model="count" />
       </div>
       <AppButton
-        class="primary" @click="$emit('addToCart', count), (count = 0)">Add to Cart</AppButton>
+        class="mt-4 w-full bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors"
+        @click="$emit('addToCart', count), (count = 0)"
+      >
+        Add to Cart
+      </AppButton>
     </div>
   </li>
 </template>
@@ -37,3 +42,6 @@ const count = ref(0);
   @apply mx-auto;
 }
 </style>
+
+
+

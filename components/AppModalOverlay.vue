@@ -17,7 +17,7 @@ defineEmits(["close"]);
   </div>
 </template>
 
-<style lang="pcss" scoped>
+<style lang="postcss" scoped>
 .close{
   @apply absolute top-2 right-2;
 }
@@ -25,10 +25,10 @@ defineEmits(["close"]);
   @apply fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-80;
 }
 .modal-overlay-content{
-  @apply fixed bg-gray-200 text-gray-800 p-10 w-4/5 rounded z-10;
-  top: 50%;
+  @apply fixed bg-gray-200 text-gray-800 p-10 w-4/5 rounded z-10 top:1/2 left:1/2;
+  /*top: 50%;
   left:50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
 }
 @media (min-width: 800px){
   .modal-overlay-content{

@@ -1,6 +1,7 @@
 <script setup>
 import { useProductStore } from "@/stores/ProductStore";
 import { useCartStore } from "@/stores/CartStore";
+//import ColorModePicker from "~/components/ColorModePicker.vue";
 
 definePageMeta({
    layout: 'default',
@@ -51,20 +52,11 @@ console.log(colorMode.preference)
     <div>
    
       <br />
-    <!--h1>Color mode: {{ $colorMode.value }}</h1-->
-    Color mode:
-    <select v-model="$colorMode.preference">
-      <option value="system">System</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-      <option value="sepia">Sepia</option>
-    </select>
-    <br/>
-    <span v-if="$colorMode.preference === 'system'">(<i>{{ $colorMode.value }}</i> mode detected)</span>
-    <!--ColorScheme placeholder="..." tag="span">
-      Color mode: <b>{{ $colorMode.preference }}</b>
-      <span v-if="$colorMode.preference === 'system'">(<i>{{ $colorMode.value }}</i> mode detected)</span>
-    </ColorScheme-->
+      <!--ClientOnly-->
+      <ColorModePicker />
+      <!--/ClientOnly-->
+
+
 
     
 

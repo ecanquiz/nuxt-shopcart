@@ -28,7 +28,9 @@ const toTwitter = () => authUserStore.visitTwitterProfile();
 
         <div>
           <span class="mr-5" @click="toTwitter">{{ user }}</span>
+          <ClientOnly>
             <CartWidget class="inline-block" />
+          </ClientOnly>
         </div>
 
       </div>

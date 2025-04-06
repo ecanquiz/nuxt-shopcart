@@ -1,5 +1,7 @@
 <script setup lang="ts">
-function iconName(theme: 'system' | 'light' | 'dark' ) {
+type Theme = 'system' | 'light' | 'dark' | 'sepia'
+
+function iconName(theme: Theme) {
   if (theme === 'system') return 'i-ph-laptop'
   if (theme === 'light') return 'i-ph-sun'
   if (theme === 'dark') return 'i-ph-moon'
@@ -8,6 +10,7 @@ function iconName(theme: 'system' | 'light' | 'dark' ) {
 </script>
 
 <template>
+  <ClientOnly>
   <div>
     <ul>
       <li
@@ -19,7 +22,7 @@ function iconName(theme: 'system' | 'light' | 'dark' ) {
         }"
       >
         <Icon
-          :name="iconName(theme)"
+          :name="iconName(theme as Theme)"
           class="size-6"
           @click="$colorMode.preference = theme"
         />
@@ -36,6 +39,8 @@ function iconName(theme: 'system' | 'light' | 'dark' ) {
       </ColorScheme>
     </p>
   </div>
+</ClientOnly>
+
 </template>
 
 <style scoped>

@@ -16,6 +16,9 @@ const toTwitter = () => authUserStore.visitTwitterProfile();
           <NuxtLink to="/">
             <span class="text-2xl font-bold text-primary-600">Bodega.com</span>                   
           </NuxtLink>
+          <NuxtLink to="/tests">
+            <span class="text-2xl font-bold text-primary-600">Test.com</span>                   
+          </NuxtLink>
         </div>
 
         <div class="flex items-center space-x-4">

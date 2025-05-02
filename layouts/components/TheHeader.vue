@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useAuthUserStore } from "@/stores/AuthUserStore";
-import CartWidget from "@/components/CartWidget.vue";
+import CartWidget from "@/components/shopcart/CartWidget.vue";
 
 const authUserStore = useAuthUserStore();
 const user = computed(() => authUserStore.username);

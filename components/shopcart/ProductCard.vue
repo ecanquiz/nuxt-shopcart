@@ -1,7 +1,8 @@
 <script setup>
 // imports
 import { ref } from "vue";
-//import AppCountInput from "./AppCountInput.vue";
+import AppButton from "@/components/app/Button.vue";
+import CountInput from "./CountInput.vue";
 
 // props
 const props = defineProps({
@@ -21,7 +22,7 @@ const count = ref(0);
      
       <div class="text-center mt-4">
         {{ product.name }} - <span class="text-green-500 mr-4">${{product.price}}</span>
-        <AppCountInput v-model="count" />
+        <CountInput v-model="count" />
       </div>
       <AppButton
         class="mt-4 w-full bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors"

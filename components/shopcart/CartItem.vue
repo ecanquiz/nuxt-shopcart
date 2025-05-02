@@ -1,4 +1,6 @@
 <script setup>
+import CountInput from "./CountInput.vue";
+
 defineProps({
   product: { type: Object, required: true },
   count: { type: Number, required: true },
@@ -10,7 +12,7 @@ defineEmits(["updateCount", "clear"]);
   <li>
     <span>{{ product.name }}</span>
     <span class="whitespace-nowrap">
-      <AppCountInput
+      <CountInput
         :model-value="count"
         @update:modelValue="$emit('updateCount', $event)"
       />

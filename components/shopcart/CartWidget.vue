@@ -1,7 +1,10 @@
 <script setup>
 // imports
 import { ref } from "vue";
+import AppButton from "@/components/app/Button.vue";
 import CartItem from "./CartItem.vue";
+import ModalOverlay from "./ModalOverlay.vue";
+
 import { useCartStore } from "@/stores/CartStore";
 const cartStore = useCartStore();
 
@@ -16,7 +19,7 @@ const active = ref(false);
       <div class="cart-count absolute">{{ cartStore.count }}</div>
     </span>
     <!-- Modal Overlay only shows when cart is clicked on -->
-    <AppModalOverlay :active="active" @close="active = false">
+    <ModalOverlay :active="active" @close="active = false">
       <div v-if="!cartStore.isEmpty">
         <ul class="items-in-cart">
           <CartItem
@@ -42,7 +45,7 @@ const active = ref(false);
       </div>
       <!-- Uncomment and use condition to show when cart is empty -->
       <div v-else><em>Cart is Empty</em></div>
-    </AppModalOverlay>
+    </ModalOverlay>
   </div>
 </template>
 <style scoped lang="postcss">

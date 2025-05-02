@@ -1,7 +1,11 @@
 <script setup>
 import { useProductStore } from "@/stores/ProductStore";
 import { useCartStore } from "@/stores/CartStore";
-//import ColorModePicker from "~/components/ColorModePicker.vue";
+import AppButton from "@/components/app/Button.vue";
+import AppColorModePicker from "@/components/app/ColorModePicker.vue";
+import ProductCard from "@/components/shopcart/ProductCard.vue";
+
+ProductCard
 
 definePageMeta({
    layout: 'default',
@@ -53,7 +57,7 @@ console.log(colorMode.preference)
    
       <br />
       <!--ClientOnly-->
-      <ColorModePicker />
+      <AppColorModePicker />
       <!--/ClientOnly-->
 
 

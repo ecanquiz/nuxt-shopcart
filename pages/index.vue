@@ -44,7 +44,8 @@ console.log(colorMode.preference)
     </div>
     <h1 class="text-4xl font-bold text-primary-800 mb-8 animate-bounce-slow">Colección Destacada</h1>
     <ClientOnly>
-      <ul class="sm:flex flex-wrap lg:flex-nowrap gap-5">
+      <!--ul class="sm:flex flex-wrap lg:flex-nowrap gap-5"-->
+      <ul class="sm:flex flex-wrap gap-5">
         <ProductCard
           v-for="product in productStore.products"
           :key="product.name"

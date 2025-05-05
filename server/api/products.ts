@@ -1,5 +1,14 @@
-export default defineEventHandler((event) => {  
-  return [{
+type product = {
+  "name": string;
+  "image": string;
+  "price": number;
+}
+
+export default defineEventHandler(async (event) => {      
+  const products: product[] = await $fetch('http://127.0.0.1:8000/api/tests');  
+  return products;
+
+  /*return [{
     "name": "Plain Ol' Pineapple",
     "image": "pineapple-original.jpg",
     "price" : 4
@@ -47,5 +56,6 @@ export default defineEventHandler((event) => {
     "name": "PPPineapple T-Shirt",
     "image": "pineapple-tshirt.jpg",
     "price" : 321
-  }]  
+  }]*/
+
 })

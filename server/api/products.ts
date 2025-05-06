@@ -5,7 +5,7 @@ type product = {
 }
 
 export default defineEventHandler(async (event) => {      
-  const products: product[] = await $fetch('http://127.0.0.1:8000/api/tests');  
+  const products: product[] = await $fetch('http://127.0.0.1:8000/api/sales-catalog');  
   return products;
 
   /*return [{

@@ -4,8 +4,11 @@ type product = {
   "price": number;
 }
 
+
+
 export default defineEventHandler(async (event) => {      
-  const products: product[] = await $fetch('http://127.0.0.1:8000/api/sales-catalog');  
+  const products: product[] = await $fetch(`${process.env.APP_API_URL}/api/sales-catalog`);
+
   return products;
 
   /*return [{

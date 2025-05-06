@@ -5,16 +5,10 @@ import AppButton from "@/components/app/Button.vue";
 import AppColorModePicker from "@/components/app/ColorModePicker.vue";
 import ProductCard from "@/components/shopcart/ProductCard.vue";
 
-ProductCard
-
 definePageMeta({
    layout: 'default',
   // colorMode: 'light',
 })
-
-
-
-
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
@@ -29,11 +23,10 @@ cartStore.$onAction(({ name, store, args, after, onError }) => {
     });
   }
 });
+
 productStore.fill();
-
 const colorMode = useColorMode()
-
-console.log(colorMode.preference)
+//console.log(colorMode.preference)
 </script>
 
 <template>
@@ -54,25 +47,15 @@ console.log(colorMode.preference)
         />
       </ul>
     </ClientOnly>
-    <div>
-   
+    <div>   
       <br />
       <!--ClientOnly-->
       <AppColorModePicker />
       <!--/ClientOnly-->
-
-
-
-    
-
+    </div>
   </div>
-  </div>
-
-  <!-- Refactor /-->
-
-  
+  <!-- Refactor /-->  
 </template>
-
 
 <style>
 body {

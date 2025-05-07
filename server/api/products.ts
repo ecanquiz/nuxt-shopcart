@@ -7,7 +7,11 @@ type product = {
 
 
 export default defineEventHandler(async (event) => {      
-  const products: product[] = await $fetch(`${process.env.APP_API_URL}/api/sales-catalog`);
+  const products: product[] = await $fetch(`${process.env.APP_API_URL}/api/sales-catalog`,{
+    headers: {
+        Authorization: `Bearer ${process.env.APP_API_SHARED_TOKEN}`
+    }
+  });
 
   return products;
 

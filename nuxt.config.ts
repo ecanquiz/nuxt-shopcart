@@ -18,7 +18,8 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt', 
     '@nuxtjs/color-mode',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    '@nuxt/ui'
   ],
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
@@ -32,3 +33,4 @@ export default defineNuxtConfig({
     storageKey: 'nuxt-color-mode'
   }
 })
+

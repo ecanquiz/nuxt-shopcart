@@ -2,7 +2,6 @@
 import { useProductStore } from "@/stores/ProductStore";
 import { useCartStore } from "@/stores/CartStore";
 import AppButton from "@/components/app/Button.vue";
-import AppColorModePicker from "@/components/app/ColorModePicker.vue";
 import ProductCard from "@/components/shopcart/ProductCard.vue";
 
 definePageMeta({
@@ -30,31 +29,32 @@ const colorMode = useColorMode()
 </script>
 
 <template>
-  <div class="container mx-auto p-10">
-    <div class="mb-5 flex justify-end">
-      <AppButton @click="cartStore.undo">Undo</AppButton>
-      <AppButton class="ml-2" @click="cartStore.redo">Redo</AppButton>
-    </div>
-    <h1 class="text-4xl font-bold text-primary-800 mb-8 animate-bounce-slow">Colección Destacada</h1>
-    <ClientOnly>
-      <!--ul class="sm:flex flex-wrap lg:flex-nowrap gap-5"-->
+  <UApp>
+    <div class="container mx-auto p-10">
+      <div class="mb-5 flex justify-end">
+        <AppButton @click="cartStore.undo">Undo</AppButton>
+        <AppButton class="ml-2" @click="cartStore.redo">Redo</AppButton>
+      </div>
+      <h1 class="text-4xl font-bold text-primary-600 mb-8 animate-bounce-slow">Colección Destacada</h1>
       <ul class="sm:flex flex-wrap gap-5">
-        <ProductCard
+        <ClientOnly fallbackTag="span">
+          <ProductCard
           v-for="product in productStore.products"
           :key="product.name"
           :product="product"
           @addToCart="cartStore.addItems($event, product)"
-        />
+          />
+          <template #fallback>
+            <p>Loading products...</p>
+          </template>
+        </ClientOnly>
+        
       </ul>
-    </ClientOnly>
-    <div>   
-      <br />
-      <!--ClientOnly-->
-      <AppColorModePicker />
-      <!--/ClientOnly-->
-    </div>
+    <div>
   </div>
-  <!-- Refactor /-->  
+  </div>
+  <!-- Refactor /--> 
+  </UApp> 
 </template>
 
 <style>

@@ -1,84 +1,43 @@
 <script setup lang="ts">
-type Theme = 'system' | 'light' | 'dark' | 'sepia'
+const useColorModePicker = () => {
+  const colorMode = useColorMode()
 
-function iconName(theme: Theme) {
-  if (theme === 'system') return 'i-ph-laptop'
-  if (theme === 'light') return 'i-ph-sun'
-  if (theme === 'dark') return 'i-ph-moon'
-  return 'i-ph-coffee'
+  const items = ref([{ 
+    label: 'System',
+    id: 'system'
+  }, {
+    label: 'Light',
+    id: 'light'
+  }, {
+    label: 'Dark',
+    id: 'dark'
+  }, {
+    label: 'Sepia',
+    id: 'sepia'
+  }])
+
+  const value = ref(colorMode.preference)
+
+  const changeValue = () => colorMode.preference = value.value
+
+  return { items , value, changeValue }  
 }
+
+const { items , value, changeValue } = useColorModePicker()
 </script>
 
 <template>
   <ClientOnly>
-  <div>
-    <ul>
-      <li
-        v-for="theme of ['system', 'light', 'dark', 'sepia']"
-        :key="theme"
-        :class="{
-          preferred: !$colorMode.unknown && theme === $colorMode.preference,
-          selected: !$colorMode.unknown && theme === $colorMode.value,
-        }"
-      >
-        <Icon
-          :name="iconName(theme as Theme)"
-          class="size-6"
-          @click="$colorMode.preference = theme"
-        />
-      </li>
-    </ul>
-    <p>
-      <ColorScheme
-        placeholder="..."
-        tag="span"
-      >
-        <!--span>Preference: <b>{{ $colorMode.preference }}</b></span>
-        <span v-if="$colorMode.preference === 'system'">&nbsp;(<i>{{ $colorMode.value }}</i> mode detected)</span>
-        <span v-if="$colorMode.forced">&nbsp;(<i>{{ $colorMode.value }}</i> forced)</span-->
-      </ColorScheme>
-    </p>
-  </div>
-</ClientOnly>
-
+    <div>
+      <USelect
+        class="w-36"
+        variant="subtle"
+        value-key="id"
+        size="xl"
+        v-model="value"
+        :items="items"
+        @change="changeValue"
+      />
+    </div>
+  </ClientOnly>
 </template>
-
-<style scoped>
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-ul li {
-  display: inline-block;
-  padding: 5px;
-  margin-right: 10px;
-  line-height: 0;
-}
-p {
-  margin: 0;
-  padding-top: 5px;
-  padding-bottom: 20px;
-}
-li {
-  position: relative;
-  top: 0px;
-  cursor: pointer;
-  padding: 7px;
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  margin: 0;
-  border-radius: 5px;
-  transition: all 0.1s ease;
-}
-li:hover {
-  top: -3px;
-}
-li.preferred {
-  border-color: var(--color-primary);
-  top: -3px;
-}
-li.selected {
-  color: var(--color-primary);
-}
-</style>

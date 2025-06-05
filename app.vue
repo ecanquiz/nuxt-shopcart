@@ -1,9 +1,7 @@
 <template>
   <!--https://tailwindflex.com/@abhirajk/shoping-products-->
+  <NuxtLoadingIndicator />
   <NuxtLayout>
-    <NuxtLoadingIndicator />
-    <!--Navbar /-->
     <NuxtPage />
-    <!--Footerbar /-->
   </NuxtLayout>
 </template>

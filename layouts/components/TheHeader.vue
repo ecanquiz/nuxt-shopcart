@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useAuthUserStore } from "@/stores/AuthUserStore";
+import AppColorModePicker from "@/components/app/ColorModePicker.vue";
 import CartWidget from "@/components/shopcart/CartWidget.vue";
 
 const authUserStore = useAuthUserStore();
@@ -36,6 +37,7 @@ const toTwitter = () => authUserStore.visitTwitterProfile();
           </ClientOnly>
         </div>
 
+        <AppColorModePicker />
       </div>
     </div>
   </header>

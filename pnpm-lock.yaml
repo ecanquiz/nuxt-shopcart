@@ -48,6 +48,9 @@ importers:
         specifier: latest
         version: 4.5.1(vue@3.5.17(typescript@5.8.3))
     devDependencies:
+      '@iconify-json/lucide':
+        specifier: ^1.2.50
+        version: 1.2.50
       '@types/lodash':
         specifier: ^4.17.18
         version: 4.17.18
@@ -393,6 +396,9 @@ packages:
     peerDependencies:
       '@fortawesome/fontawesome-svg-core': ~1 || ~6
       vue: '>= 3.0.0 < 4'
+
+  '@iconify-json/lucide@1.2.50':
+    resolution: {integrity: sha512-ur4i4oDPK7o7EgBdln1HDvnX4vDQP28lZvFDF8zI4ynymIihEMuTeK7/NPRLqV/LiX1D8xIRh+P/8OxWVjXafg==}
 
   '@iconify/collections@1.0.560':
     resolution: {integrity: sha512-sXm0Io67deUIqWmaSGb+JJ4Y9DJvgT/seaQlCOHUuHhs3qcPuLY6WMlfoUSmmXV5yHFhZprRZEs1np2BZ/BCJw==}
@@ -4400,6 +4406,10 @@ snapshots:
     dependencies:
       '@fortawesome/fontawesome-svg-core': 6.7.2
       vue: 3.5.17(typescript@5.8.3)
+
+  '@iconify-json/lucide@1.2.50':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/collections@1.0.560':
     dependencies:

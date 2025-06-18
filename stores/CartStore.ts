@@ -1,50 +1,73 @@
+import { ref, computed } from "vue";
 import { defineStore, acceptHMRUpdate } from "pinia";
-//import { useLocalStorage } from "@vueuse/core";
 import { groupBy } from "lodash";
 import { useAuthUserStore } from "@/stores/AuthUserStore";
-export const useCartStore = defineStore("CartStore", {
-  historyEnabled: true,
-  state: () => {
-    return {
-      //items: useLocalStorage("CartStore:items", []),
-      items: [],
-      test: "hello world",
-    };
-  },
-  getters: {
-    count: (state) => state.items.length,
-    isEmpty: (state) => state.count === 0,
-    grouped: (state) => {
-      const grouped = groupBy(state.items, (item) => item.name);
-      const sorted = Object.keys(grouped).sort();
-      let inOrder = {};
-      sorted.forEach((key) => (inOrder[key] = grouped[key]));
-      return inOrder;
-    },
-    groupCount: (state) => (name) => state.grouped[name].length,
-    total: (state) => state.items.reduce((p, c) => p + c.price, 0),
-  },
-  actions: {
-    checkout() {
-      const authUserStore = useAuthUserStore();
-      alert(
-        `${authUserStore.username} just bought ${this.count} items at a total of $${this.total}`
-      );
-    },
-    addItems(count, item) {
-      count = parseInt(count);
-      for (let index = 0; index < count; index++) {
-        this.items.push({ ...item });
-      }
-    },
-    clearItem(itemName) {
-      this.items = this.items.filter((item) => item.name !== itemName);
-    },
-    setItemCount(item, count) {
-      this.clearItem(item.name);
-      this.addItems(count, item);
-    },
-  },
+
+type Product = {
+  name: string;
+  image: string;
+  price: number;
+};
+
+export const useCartStore = defineStore("CartStore", () => {
+  // Estado
+  const items = ref<Product[]>([]);
+  const test = ref("hello world");
+
+  // Getters
+  const count = computed(() => items.value.length);
+  const isEmpty = computed(() => count.value === 0);
+
+  const grouped = computed(() => {
+    const groupedObj = groupBy(items.value, (item) => item.name);
+    const sorted = Object.keys(groupedObj).sort();
+    const inOrder: Record<string, Product[]> = {};
+    sorted.forEach((key) => (inOrder[key] = groupedObj[key]));
+    return inOrder;
+  });
+
+  const groupCount = (name: string) => grouped.value[name]?.length ?? 0;
+  const total = computed(() =>
+    items.value.reduce((p, c) => p + c.price, 0)
+  );
+
+  // Actions
+  function checkout() {
+    const authUserStore = useAuthUserStore();
+    alert(
+      `${authUserStore.username} just bought ${count.value} items at a total of $${total.value}`
+    );
+  }
+
+  function addItems(countToAdd: number, item: Product) {
+    const countParsed = parseInt(countToAdd as unknown as string, 10);
+    for (let index = 0; index < countParsed; index++) {
+      items.value.push({ ...item });
+    }
+  }
+
+  function clearItem(itemName: string) {
+    items.value = items.value.filter((item) => item.name !== itemName);
+  }
+
+  function setItemCount(item: Product, countToSet: number) {
+    clearItem(item.name);
+    addItems(countToSet, item);
+  }
+
+  return {
+    items,
+    test,
+    count,
+    isEmpty,
+    grouped,
+    groupCount,
+    total,
+    checkout,
+    addItems,
+    clearItem,
+    setItemCount,
+  };
 });
 
 if (import.meta.hot) {

@@ -3,9 +3,10 @@ import { useProductStore } from "@/stores/ProductStore";
 import { useCartStore } from "@/stores/CartStore";
 import AppButton from "@/components/app/Button.vue";
 import ProductCard from "@/components/shopcart/ProductCard.vue";
+import AppGenericPaginate from "@/components/app/GenericPaginate.vue";
 
 definePageMeta({
-   layout: 'default',
+  layout: 'default',
   // colorMode: 'light',
 })
 
@@ -30,42 +31,41 @@ const colorMode = useColorMode()
 
 <template>
   <UApp>
-    <div class="container mx-auto p-10">
-      <div class="mb-5 flex justify-end">
+    <div class="container mx-auto p-4 sm:p-10">
+      <div class="mb-5 flex flex-col sm:flex-row justify-end gap-2">
         <AppButton @click="cartStore.undo">Undo</AppButton>
-        <AppButton class="ml-2" @click="cartStore.redo">Redo</AppButton>
+        <AppButton class="sm:ml-2" @click="cartStore.redo">Redo</AppButton>
       </div>
       <h1 class="text-4xl font-bold text-primary-600 mb-8 animate-bounce-slow">Colección Destacada</h1>
       <ul class="sm:flex flex-wrap gap-5">
         <ClientOnly fallbackTag="span">
-          <ProductCard
-          v-for="product in productStore.products"
-          :key="product.name"
-          :product="product"
-          @addToCart="cartStore.addItems($event, product)"
-          />
+          <ProductCard v-for="product in productStore.products" :key="product.name" :product="product"
+            @addToCart="cartStore.addItems($event, product)" />
           <template #fallback>
             <p>Loading products...</p>
           </template>
         </ClientOnly>
-        
       </ul>
-    <div>
-  </div>
-  </div>
-  <!-- Refactor /--> 
-  </UApp> 
+      <div class="mt-10 flex justify-center">
+        <AppGenericPaginate :currentPage="productStore.pagination.page" :totalPages="productStore.pagination.totalPages"
+          :totalItems="productStore.pagination.total" @prev="productStore.previousPage" @next="productStore.nextPage" />
+      </div>
+    </div>
+    <!-- Refactor /-->
+  </UApp>
 </template>
 
 <style>
 body {
   background-color: #fff;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
+
 .dark-mode body {
   background-color: #091a28;
   color: #ebf4f1;
 }
+
 .sepia-mode body {
   background-color: #f1e7d0;
   color: #433422;

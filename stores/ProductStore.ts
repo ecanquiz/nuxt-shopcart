@@ -1,5 +1,6 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { defineStore } from "pinia";
+import { usePaginationStore } from "@/stores/PaginationStore";
 
 type Product = {
   name: string;
@@ -8,40 +9,40 @@ type Product = {
 };
 
 export const useProductStore = defineStore("ProductStore", () => {
+  const pagination = usePaginationStore();
   const products = ref<Product[]>([]);
-  const pagination = ref({
-    page: 1,
-    limit: 10,
-    total: 0,
-    totalPages: 0,
-  });
-  async function fill() {
-    // const { data, error } = await useFetch('/api/products');
-    // products.value = data.value as Product[];
-    // Para evitar errores de tipado y asegurar reactividad:
-    const { data } = await useFetch('/api/products');
+
+  async function fill(page = pagination.currentPage) {
+    const { data } = await useFetch(`/api/products?page=${page}&limit=${pagination.pageSize}`);
     if (data.value) {
       products.value = data.value.data as Product[];
-      pagination.value.total = data.value.pagination.total;
-      pagination.value.totalPages = data.value.pagination.totalPages;
+      pagination.setPagination(
+        data.value.pagination.page,
+        data.value.pagination.total,
+        data.value.pagination.pageSize
+      );
     }
   }
 
-  const previusPage = () => {
-    if (pagination.value.page > 1) {
-      pagination.value.page--;
+  // Actualiza productos al cambiar de página
+  watch(() => pagination.currentPage, async (newPage) => {
+    await fill(newPage);
+  });
+
+  const previousPage = () => {
+    if (pagination.currentPage > 1) {
+      pagination.previousPage();
     }
   };
   const nextPage = () => {
-    if (pagination.value.page < pagination.value.totalPages) {
-      pagination.value.page++;
+    if (pagination.currentPage < pagination.totalPages) {
+      pagination.nextPage();
     }
   };
 
   return {
     products,
-    pagination,
-    previusPage,
+    previousPage,
     nextPage,
     fill,
   };

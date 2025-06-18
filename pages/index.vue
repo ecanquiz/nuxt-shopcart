@@ -4,6 +4,7 @@ import { useCartStore } from "@/stores/CartStore";
 import AppButton from "@/components/app/Button.vue";
 import ProductCard from "@/components/shopcart/ProductCard.vue";
 import AppGenericPaginate from "@/components/app/GenericPaginate.vue";
+import { usePaginationStore } from '../stores/PaginationStore';
 
 definePageMeta({
   layout: 'default',
@@ -11,6 +12,7 @@ definePageMeta({
 })
 
 const productStore = useProductStore();
+const pagination = usePaginationStore()
 const cartStore = useCartStore();
 
 cartStore.$onAction(({ name, store, args, after, onError }) => {
@@ -47,8 +49,8 @@ const colorMode = useColorMode()
         </ClientOnly>
       </ul>
       <div class="mt-10 flex justify-center">
-        <AppGenericPaginate :currentPage="productStore.pagination.page" :totalPages="productStore.pagination.totalPages"
-          :totalItems="productStore.pagination.total" @prev="productStore.previousPage" @next="productStore.nextPage" />
+        <AppGenericPaginate :currentPage="pagination.currentPage" :totalPages="pagination.totalPages"
+          :totalItems="pagination.totalItems" @prev="productStore.previousPage" @next="productStore.nextPage" />
       </div>
     </div>
     <!-- Refactor /-->

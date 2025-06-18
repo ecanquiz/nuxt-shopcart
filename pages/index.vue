@@ -9,8 +9,11 @@ import { usePaginationStore } from '../stores/PaginationStore';
 definePageMeta({
   layout: 'default',
   // colorMode: 'light',
+  title: 'Shop-Cart',
 })
-
+useHead({
+  title: 'Shop-Cart',
+})
 const productStore = useProductStore();
 const pagination = usePaginationStore()
 const cartStore = useCartStore();

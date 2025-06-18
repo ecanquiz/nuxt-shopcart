@@ -54,7 +54,11 @@ export const useCartStore = defineStore("CartStore", () => {
     clearItem(item.name);
     addItems(countToSet, item);
   }
-
+  // Resetear el state del store
+  function reset() {
+    items.value = [];
+    test.value = "hello world";
+  }
   return {
     items,
     test,
@@ -67,6 +71,7 @@ export const useCartStore = defineStore("CartStore", () => {
     addItems,
     clearItem,
     setItemCount,
+    reset,
   };
 });
 

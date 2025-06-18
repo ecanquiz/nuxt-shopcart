@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   app: {
     head: {
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '_nuxt/public/favicon.ico' }]
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '_nuxt/public/icon-512x512.svg' }]
     }
   },
   compatibilityDate: '2024-11-01',
@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/icon',
+    '@vite-pwa/nuxt',
     '@nuxt/ui'
   ],
   colorMode: {
@@ -34,6 +35,30 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'nuxt-color-mode'
+  },
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Shop-Cart',
+      short_name: 'ShopCart',
+      description: 'Tu tienda online',
+      theme_color: '#2563eb',
+      background_color: '#ffffff',
+      display: 'standalone',
+      start_url: '/',
+      icons: [
+        {
+          src: '/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
+    }
   }
 })
 

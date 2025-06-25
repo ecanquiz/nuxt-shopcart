@@ -4,11 +4,14 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   app: {
     head: {
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '_nuxt/public/favicon.ico' }]
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '_nuxt/public/favicon.ico' }]
     }
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  experimental: {
+    typedPages: true
+  },
   vite: {
     plugins: [
       tailwindcss(),
@@ -16,7 +19,7 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   modules: [
-    '@pinia/nuxt', 
+    '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/icon',
     '@nuxt/ui'

@@ -9,16 +9,11 @@ defineProps({
 defineEmits(["updateCount", "clear"]);
 </script>
 <template>
-  <li>
+  <li class="flex justify-between p-2 odd:bg-gray-300 even:bg-gray-200">
     <span>{{ product.name }}</span>
     <span class="whitespace-nowrap">
-      <CountInput
-        :model-value="count"
-        @update:modelValue="$emit('updateCount', $event)"
-      />
-      <span class="inline-block w-12 text-right"
-        >${{ count * product.price }}</span
-      >
+      <CountInput :model-value="count" @update:modelValue="$emit('updateCount', $event)" />
+      <span class="inline-block w-12 text-right">${{ count * product.price }}</span>
       <span class="ml-4" @click="$emit('clear')">
         <fa icon="trash-alt" />
       </span>

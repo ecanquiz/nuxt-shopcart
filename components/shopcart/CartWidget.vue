@@ -22,25 +22,16 @@ const active = ref(false);
     <ModalOverlay :active="active" @close="active = false">
       <div v-if="!cartStore.isEmpty">
         <ul class="items-in-cart">
-          <CartItem
-            v-for="(items, name) in cartStore.grouped"
-            :key="name"
-            :product="items[0]"
-            :count="cartStore.groupCount(name)"
-            @updateCount="cartStore.setItemCount(items[0], $event)"
-            @clear="cartStore.clearItem(name)"
-          />
+          <CartItem v-for="(items, name) in cartStore.grouped" :key="name" :product="items[0]"
+            :count="cartStore.groupCount(name)" @updateCount="cartStore.setItemCount(items[0], $event)"
+            @clear="cartStore.clearItem(name)" />
         </ul>
         <div class="flex justify-end text-2xl mb-5">
           Total: <strong>${{ cartStore.total }}</strong>
         </div>
         <div class="flex justify-end">
-          <AppButton class="secondary mr-2" @click="cartStore.$reset()"
-            >Clear Cart</AppButton
-          >
-          <AppButton class="primary" @click="cartStore.checkout"
-            >Checkout</AppButton
-          >
+          <AppButton class="secondary mr-2" @click="cartStore.reset()">Clear Cart</AppButton>
+          <AppButton class="primary" @click="cartStore.checkout">Checkout</AppButton>
         </div>
       </div>
       <!-- Uncomment and use condition to show when cart is empty -->
@@ -49,13 +40,15 @@ const active = ref(false);
   </div>
 </template>
 <style scoped lang="postcss">
-.items-in-cart{
+.items-in-cart {
   @apply mb-5;
 }
-.items-in-cart li{
+
+.items-in-cart li {
   @apply flex justify-between p-2;
 }
-.items-in-cart li:nth-of-type(even){
+
+.items-in-cart li:nth-of-type(even) {
   @apply bg-gray-300;
 }
 
@@ -71,6 +64,7 @@ const active = ref(false);
 .card {
   @apply shadow rounded-lg p-4 text-center text-lg font-bold text-gray-700 bg-white sm:w-1/3 lg:w-1/4 flex-grow;
 }
+
 .card img {
   @apply mx-auto;
 }

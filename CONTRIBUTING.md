@@ -2,7 +2,7 @@
 
 1. Fork the repo.
 2. Create a branch: `git checkout -b mi-feature`.
-3. Make descriptive commits..
+3. Make descriptive commits.
 4. Submit a PR to `develop` and describe the changes.
 
 ## Branches  
@@ -12,4 +12,3 @@
 ## Branch flow
 - `develop`: Accepts PRs from any branch (e.g. `feature/xxx`).
 - `main`: **Only accepts PRs from `develop`** (never from other branches).
-

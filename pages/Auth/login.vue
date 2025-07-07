@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+  <div class="flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
     <UCard class="w-full max-w-md">
       <template #header>
         <div class="text-center">
@@ -23,20 +23,7 @@
       />
 
       <!-- Google Sign In Button -->
-      <UButton
-        block
-        size="lg"
-        color="primary"
-        :loading="isLoading"
-        :disabled="isLoading"
-        @click="signInWithGoogle"
-        class="justify-center mb-4"
-      >
-        <template #leading>
-          <UIcon name="i-logos-google-icon" class="w-5 h-5" />
-        </template>
-        Continue with Google
-      </UButton>
+     <GoogleSigIn />
 
       <div class="relative my-6">
         <div class="absolute inset-0 flex items-center">
@@ -100,9 +87,12 @@
           block
           :loading="isSubmitting"
           :disabled="isSubmitting"
-          class="mt-6"
+          class="mt-6 cursor-pointer"
         >
           Sign in
+          <template #trailing>
+            <UIcon name="i-heroicons-arrow-right-on-rectangle" size="18" class="text-white font-bold"/>
+          </template>
         </UButton>
       </UForm>
 
@@ -124,10 +114,18 @@
 <script setup lang="ts">
 import { useAuth } from '@/pages/Auth/composables/useAuth'
 
+definePageMeta({
+  layout: 'default',
+  // colorMode: 'light',
+  title: 'Login',
+})
+useHead({
+  title: 'Login',
+})
 const route = useRoute()
 const router = useRouter()
 
-const { signIn, isLoading, isSubmitting, showPassword, errorMessage } = useAuth()
+const { isSubmitting, showPassword, errorMessage } = useAuth()
 
 // Form state
 const form = reactive({
@@ -175,9 +173,5 @@ const onSubmit = async () => {
   }
 }
 
-// Google OAuth sign in
-const signInWithGoogle = async () => {
-   
- await  signIn('google')
-}
+
 </script>

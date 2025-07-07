@@ -8,6 +8,16 @@ export default defineNuxtConfig({
     }
   },
   compatibilityDate: '2024-11-01',
+  pages: {
+    pattern: ['**/*.vue', '!**/components/**']
+  },
+  components: {
+    dirs: ['~/components', {
+      path: '~/pages',
+      pattern: '**/components/**',
+      pathPrefix: false
+    }]
+  },
   devtools: { enabled: true },
   experimental: {
     typedPages: true

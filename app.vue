@@ -16,7 +16,7 @@ onMounted(async () => {
 <template>
   <!--https://tailwindflex.com/@abhirajk/shoping-products-->
   <NuxtLoadingIndicator />
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 </template>

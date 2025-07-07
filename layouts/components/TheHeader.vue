@@ -45,7 +45,7 @@ const dropdownItems = computed(() => {
           {
             label: 'Sign in',
             icon: 'i-heroicons-arrow-left-on-rectangle',
-            onSelect: () => authUserStore.signIn('google')
+            to: '/auth/login'
           }
         ]
   ]

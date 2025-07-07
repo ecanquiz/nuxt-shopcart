@@ -1,14 +1,58 @@
 <script setup lang="ts">
-import { ref, computed } from "vue"
-import { useAuthUserStore } from "@/stores/AuthUserStore";
-import AppColorModePicker from "@/components/app/ColorModePicker.vue";
-import CartWidget from "@/components/shopcart/CartWidget.vue";
+import { ref, computed } from 'vue'
+import AppColorModePicker from '@/components/app/ColorModePicker.vue'
+import CartWidget from '@/components/shopcart/CartWidget.vue'
+import { useAuth } from '~/pages/Auth/composables/useAuth'
 
-const authUserStore = useAuthUserStore();
-const user = computed(() => authUserStore.username);
-const toTwitter = () => authUserStore.visitTwitterProfile();
 
-const mobileMenuOpen = ref(false);
+defineOptions({
+  name: 'TheHeader'
+})
+
+const authUserStore = useAuth()
+
+const mobileMenuOpen = ref(false)
+
+// Create dropdown items based on authentication state
+const dropdownItems = computed(() => {
+  const items = [
+    [{
+      label: authUserStore.username.value || 'Guest User',
+      slot: 'account',
+      disabled: true
+    }],
+    [
+      {
+        label: 'Settings',
+        icon: 'i-heroicons-cog-6-tooth',
+        to: '#'
+      },
+      {
+        label: 'Billing',
+        icon: 'i-heroicons-credit-card',
+        to: '#'
+      }
+    ],
+    authUserStore.isAuthenticated.value
+      ? [
+          {
+            label: 'Sign out',
+            icon: 'i-heroicons-arrow-right-on-rectangle',
+            onSelect: () => authUserStore.signOut()
+          }
+        ]
+      : [
+          {
+            label: 'Sign in',
+            icon: 'i-heroicons-arrow-left-on-rectangle',
+            onSelect: () => authUserStore.signIn('google')
+          }
+        ]
+  ]
+  
+  return items
+})
+
 </script>
 
 <template>
@@ -18,7 +62,7 @@ const mobileMenuOpen = ref(false);
         <!-- Logo y menú hamburguesa -->
         <div class="flex items-center space-x-4">
           <NuxtLink to="/">
-            <span class="text-2xl font-bold text-primary-600">Bodega.com</span>
+            <span class="text-2xl font-bold text-primary-600">Bodega.com </span>
           </NuxtLink>
           <button class="lg:hidden ml-2 p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary-400"
             @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Abrir menú">
@@ -41,26 +85,67 @@ const mobileMenuOpen = ref(false);
             class="w-64 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary-400 transition-all" />
         </div>
 
-        <!-- Usuario y carrito -->
-        <div class="flex items-center">
-          <span class="mr-5 cursor-pointer hidden sm:inline" @click="toTwitter">{{ user }}</span>
+        <!-- User and cart -->
+        <div class="flex items-center gap-2">
           <ClientOnly>
             <CartWidget class="inline-block" />
           </ClientOnly>
-          <AppColorModePicker class="ml-4" />
+          
+          <AppColorModePicker class="ml-2" />
+          
+          <UDropdownMenu :items="dropdownItems" :ui="{ content: 'w-48' }">
+            <UButton
+              color="primary"
+              variant="ghost"
+              :label="authUserStore.username.value || 'Account'"
+              trailing-icon="i-heroicons-chevron-down-20-solid"
+              class="ml-2"
+            />
+            
+            <template #account>
+              <div class="text-left">
+                <p class="truncate text-sm font-medium text-gray-900 dark:text-white">
+                  {{ authUserStore.username.value || 'Guest User' }}
+                </p>
+                <p class="truncate text-xs text-gray-500 dark:text-gray-400">
+                  {{ authUserStore.username.value ? 'View profile' : 'Sign in to your account' }}
+                </p>
+              </div>
+            </template>
+          </UDropdownMenu>
         </div>
       </div>
 
       <!-- Menú móvil -->
       <transition name="fade">
-        <div v-if="mobileMenuOpen"
-          class="lg:hidden mt-2 bg-white dark:bg-gray-800 rounded shadow-md p-4 flex flex-col space-y-4">
+        <div v-if="mobileMenuOpen" class="lg:hidden mt-2 bg-white dark:bg-gray-800 rounded shadow-md p-4 flex flex-col space-y-4">
           <NuxtLink to="/tests" class="text-lg font-semibold text-primary-600" @click="mobileMenuOpen = false">
             Test.com
           </NuxtLink>
           <input type="text" placeholder="Search products..."
             class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary-400 transition-all" />
-          <span class="cursor-pointer" @click="toTwitter">{{ user }}</span>
+          
+          <!-- Mobile User Dropdown -->
+          <UDropdownMenu :items="dropdownItems">
+            <UButton
+              color="primary"
+              variant="ghost"
+              :label="authUserStore.username.value || 'Account'"
+              icon="i-lucide-user"
+              class="w-full justify-start"
+            />
+            
+            <template #account>
+              <div class="text-left w-full">
+                <p class="truncate text-sm font-medium text-gray-900 dark:text-white">
+                  {{ authUserStore.username.value || 'Guest User' }}
+                </p>
+                <p class="truncate text-xs text-gray-500 dark:text-gray-400">
+                  {{ authUserStore.username.value ? 'View profile' : 'Sign in to your account' }}
+                </p>
+              </div>
+            </template>
+          </UDropdownMenu>
         </div>
       </transition>
     </div>

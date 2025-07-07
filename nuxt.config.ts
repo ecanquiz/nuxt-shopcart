@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/icon',
     '@vite-pwa/nuxt',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    'nuxt-auth-utils'
   ],
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
@@ -35,6 +36,33 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'nuxt-color-mode'
+  },
+  
+  runtimeConfig: {
+    // Session configuration
+    session: {
+      password: process.env.NUXT_SESSION_PASSWORD || 'default-session-password-32-characters-min',
+      name: 'nuxt-session',
+      cookie: {
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production'
+      }
+    },
+    
+    // OAuth configuration
+    oauth: {
+      google: {
+        clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+      }
+    },
+    
+    // Public config that's exposed to the client
+    public: {
+      auth: {
+        baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL || 'http://localhost:3000',
+      }
+    }
   },
   pwa: {
     registerType: 'autoUpdate',
@@ -61,4 +89,3 @@ export default defineNuxtConfig({
     }
   }
 })
-

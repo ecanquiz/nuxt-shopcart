@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(0,255,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d="M128 128H48V152H90.03L136 360.96C139.47 375.68 152.53 384 168 384H408C423.47 384 436.53 375.68 440 360.96L486 152H512V128H464L442.67 66.19C436.8 35.2 409.6 16 384 16H96C70.4 16 43.2 35.2 37.33 66.19L0 128H128ZM168 416C146.4 416 128 434.4 128 456C128 477.6 146.4 496 168 496C189.6 496 208 477.6 208 456C208 434.4 189.6 416 168 416ZM344 416C322.4 416 304 434.4 304 456C304 477.6 322.4 496 344 496C365.6 496 384 477.6 384 456C384 434.4 365.6 416 344 416Z" fill="url(#grad1)"/>
+  <circle cx="168" cy="456" r="40" fill="url(#grad2)" />
+  <circle cx="344" cy="456" r="40" fill="url(#grad2)" />
+</svg>

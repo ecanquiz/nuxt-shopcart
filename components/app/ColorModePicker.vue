@@ -33,7 +33,6 @@ const { items , value, changeValue } = useColorModePicker()
         class="w-36"
         variant="subtle"
         value-key="id"
-        size="xl"
         v-model="value"
         :items="items"
         @change="changeValue"

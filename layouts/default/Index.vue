@@ -9,6 +9,6 @@ import Navbar from './Navbar.vue'
   <div>
     <TheHeader />
     <slot />
-    <!--TheFooter /-->
+    <!-- <TheFooter /> -->
   </div>
 </template>

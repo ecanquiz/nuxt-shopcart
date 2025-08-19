@@ -45,6 +45,7 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type="number"] {
+  appearance: none;
   -moz-appearance: textfield;
 }
 

@@ -1,4 +1,5 @@
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 import { defineStore, acceptHMRUpdate } from "pinia";
 import { groupBy } from "lodash";
 import { useAuthUserStore } from "@/stores/AuthUserStore";
@@ -10,6 +11,7 @@ type Product = {
 };
 
 export const useCartStore = defineStore("CartStore", () => {
+  const router = useRouter();
   // Estado
   const items = ref<Product[]>([]);
   const test = ref("hello world");
@@ -37,6 +39,7 @@ export const useCartStore = defineStore("CartStore", () => {
     alert(
       `${authUserStore.username} just bought ${count.value} items at a total of $${total.value}`
     );
+    void router.push('/checkout');
   }
 
   function addItems(countToAdd: number, item: Product) {

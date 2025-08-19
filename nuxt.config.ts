@@ -34,7 +34,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vite-pwa/nuxt',
     '@nuxt/ui',
-    'nuxt-auth-utils'
+    'nuxt-auth-utils',
+    '@nuxtjs/i18n'
   ],
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
@@ -97,5 +98,24 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en.json'
+      },
+      {
+        code: 'es',
+        name: 'Spanish',
+        file: 'es.json'
+      }
+    ],    
+    langDir: './locales',
+    strategy: 'prefix_except_default',
+    vueI18n: './i18n.config.ts'
   }
+    
 })

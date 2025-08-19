@@ -1,0 +1,12 @@
+{
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "menu":{
+        "username": "Usuario Invitado",
+        "settings": "Configuración",
+        "billing": "Facturación",
+        "signout": "Cerrar sesión",
+        "signin": "Iniciar sesión"
+    }
+}

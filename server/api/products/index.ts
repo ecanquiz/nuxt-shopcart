@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
         };
 
         const validProducts = products.filter(isValidProduct);
-
+        console.log(validProducts);
         return {
             data: validProducts.slice(start, end),
             pagination: {

@@ -48,9 +48,8 @@ export default defineNuxtConfig({
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'nuxt-color-mode'
   },
-  
+  // Session configuration
   runtimeConfig: {
-    // Session configuration
     session: {
       password: process.env.NUXT_SESSION_PASSWORD || 'default-session-password-32-characters-min',
       name: 'nuxt-session',
@@ -58,21 +57,20 @@ export default defineNuxtConfig({
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production'
       }
-    },
-    
+    },    
     // OAuth configuration
     oauth: {
       google: {
         clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
         clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
       }
-    },
-    
+    },    
     // Public config that's exposed to the client
     public: {
       auth: {
         baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL || 'http://localhost:3000',
-      }
+      },
+      APP_API_STATIC_SERVER_URL: process.env.APP_API_STATIC_SERVER_URL || 'http://localhost:9000'
     }
   },
   pwa: {
@@ -116,6 +114,5 @@ export default defineNuxtConfig({
     langDir: './locales',
     strategy: 'prefix_except_default',
     vueI18n: './i18n.config.ts'
-  }
-    
+  }    
 })

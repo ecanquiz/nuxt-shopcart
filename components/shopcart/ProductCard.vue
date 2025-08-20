@@ -1,23 +1,19 @@
 <script setup>
-// imports
 import { ref } from "vue";
 // import AppButton from "@/components/app/Button.vue";
 import CountInput from "./CountInput.vue";
 
-// props
 const props = defineProps({
   product: Object,
 });
 
-// emits
 defineEmits(["addToCart"])
 
-// data
 const count = ref(0);
 </script>
 <template>
   <li class="card my-2">
-    <img :src="`${product.image}`" class="max-w-[400px] h-64 object-cover mb-3 rounded-2xl" width="400" />
+    <img :src="`${useRuntimeConfig().public.APP_API_STATIC_SERVER_URL}/storage/images/${product.image}`" class="max-w-[400px] h-64 object-cover mb-3 rounded-2xl" width="400" />
     <div>
       <h2>{{ product.name }}</h2>
       <div class="flex justify-between my-4 max-w-[400px]">

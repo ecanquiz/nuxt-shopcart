@@ -16,13 +16,14 @@ export default defineEventHandler(async (event) => {
             return sendError(event, createError({ statusCode: 405, statusMessage: 'Method Not Allowed' }));
         }
 
-        const { rows } = await $fetch<SalesCatalogResponse>(`${process.env.APP_API_URL}/api/sales-catalog?page=${pageNumber}&limit=${pageSizeNumber}`, {
-            headers: { Authorization: `Bearer ${process.env.APP_API_SHARED_TOKEN}` }
-          })
+        const { rows } = await $fetch<SalesCatalogResponse>(
+            `${process.env.APP_API_WAREHOUSE_URL}/api/sales-catalog?page=${pageNumber}&limit=${pageSizeNumber}`,
+            { headers: { Authorization: `Bearer ${process.env.APP_API_WAREHOUSE_SHARED_TOKEN}` } }
+        )
 
         // Map API catalog items to IProduct shape
         const products: IProduct[] = rows.data.map((item: CatalogItem) => {
-            const photosArr = typeof item.photos === 'string' ? parsePhotos(item.photos) : []
+            const photosArr = typeof item.image_names === 'string' ? parsePhotos(item.image_names) : []
             return {
                 name: item.name,
                 image: photosArr[0] || '',
@@ -59,4 +60,3 @@ export default defineEventHandler(async (event) => {
         return sendError(event, createError({ statusCode: 500, statusMessage: 'Internal Server Error' }));
     }
 });
-

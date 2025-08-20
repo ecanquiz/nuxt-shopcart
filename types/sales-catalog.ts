@@ -5,7 +5,7 @@ export interface CatalogItem {
   int_cod: string;
   name: string;
   status: number;
-  photos: string; // comma-braced list string from API, e.g. "{url1,url2}"
+  image_names: string; // comma-braced list string from API, e.g. "{url1,url2}"
   description: string;
   id_user_insert: number;
   id_user_update: number;

@@ -1,0 +1,12 @@
+{
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "menu":{
+        "username": "Guest User",
+        "settings": "Settings",
+        "billing": "Billing",
+        "signout": "Sign out",
+        "signin": "Sign in"
+    }
+}
